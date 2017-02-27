@@ -11,7 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Modify Metadata</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>logo.png</normalon>
+   </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame_2">
@@ -81,9 +86,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="ButtonCancel">
+      <widget class="QPushButton" name="ButtonClose">
        <property name="text">
-        <string>Cancel</string>
+        <string>Close</string>
        </property>
       </widget>
      </item>
@@ -157,10 +162,6 @@
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <zorder>frame_2</zorder>
-    <zorder>ComboClassification</zorder>
-    <zorder>LabelCopyright_3</zorder>
-    <zorder>LabelSelected</zorder>
    </widget>
    <widget class="QFrame" name="frame_3">
     <property name="geometry">
@@ -235,7 +236,7 @@
   <tabstop>CheckBoxRemove</tabstop>
   <tabstop>ButtonSelectImages</tabstop>
   <tabstop>ButtonApply</tabstop>
-  <tabstop>ButtonCancel</tabstop>
+  <tabstop>ButtonClose</tabstop>
  </tabstops>
  <resources/>
  <connections/>

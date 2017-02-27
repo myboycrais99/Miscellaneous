@@ -1,6 +1,7 @@
 """
-pyinstaller --path C:\\Python35-32\\Lib\\site-packages\\PyQt5\\Qt\\bin Modify_JPG_Metadata.py
-pyinstaller --path C:\\Users\\Ryan\\AppData\\Local\\Programs\\Python\\Python35\\Lib\\site-packages\\PyQt5\\Qt\\bin Modify_JPG_Metadata.py
+pyuic5 Modify_JPG_Metadata.ui -o design.py
+pyinstaller --onefile --path C:\\Python35-32\\Lib\\site-packages\\PyQt5\\Qt\\bin Modify_JPG_Metadata.py
+pyinstaller --onefile --path C:\\Users\\Ryan\\AppData\\Local\\Programs\\Python\\Python35\\Lib\\site-packages\\PyQt5\\Qt\\bin Modify_JPG_Metadata.py
 """
 
 import piexif
@@ -9,6 +10,9 @@ import sys  # We need sys so that we can pass argv to QApplication
 import design  # This file holds our MainWindow and all design related things
                # it also keeps events etc that we defined in Qt Designer
 
+# In Python2 methods are bound to QtGui while the same methods are bound to
+# QtWidgets in Python3. This block of code creates a dumby object based on the
+# current version of python.
 try:
     QtGui.QMainWindow
     QtGui_module = QtGui
@@ -19,13 +23,10 @@ except AttributeError:
 
 class ModifyApp(QtGui_module.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
-        # Explaining super is out of the scope of this article
-        # So please google it if you're not familar with it
-        # Simple reason why we use it here is that it allows us to
-        # access variables, methods etc in the design.py file
         super(self.__class__, self).__init__()
-        self.setupUi(self)  # This is defined in design.py file automatically
-                            # It sets up layout and widgets that are defined
+        # This is defined in design.py file automatically. It sets up layout and
+        # widgets that are defined
+        self.setupUi(self)
 
         self.COPYRIGHT = 33432
         self.CLASSIFICATION = 37394
@@ -34,12 +35,11 @@ class ModifyApp(QtGui_module.QMainWindow, design.Ui_MainWindow):
         self.images = None
 
         self.ButtonSelectImages.clicked.connect(self.browse_folder)
-        self.ButtonCancel.clicked.connect(self.exit)
+        self.ButtonClose.clicked.connect(self.exit)
         self.ButtonApply.clicked.connect(self.modify_metadata)
 
     def browse_folder(self):
         images = QtGui_module.QFileDialog.getOpenFileNames(
-            self,
             caption="Select one or more JPGs to modify",
             filter="Images (*.jpg);;All Files (*.*)",
             )[0]
