@@ -9,6 +9,7 @@ from PyQt5 import QtGui, QtWidgets  # Import the PyQt4 module we'll need
 import sys  # We need sys so that we can pass argv to QApplication
 import design  # This file holds our MainWindow and all design related things
                # it also keeps events etc that we defined in Qt Designer
+from PIL import Image
 
 # In Python2 methods are bound to QtGui while the same methods are bound to
 # QtWidgets in Python3. This block of code creates a dumby object based on the
@@ -31,6 +32,7 @@ class ModifyApp(QtGui_module.QMainWindow, design.Ui_MainWindow):
         self.COPYRIGHT = 33432
         self.CLASSIFICATION = 37394
         self.TAGS = 40094
+        self.THUMBNAIL = (100, 100)
 
         self.images = None
 
@@ -96,6 +98,13 @@ class ModifyApp(QtGui_module.QMainWindow, design.Ui_MainWindow):
 
                 # Insert EXIF data into JPG
                 piexif.insert(exif_bytes, picture)
+
+                if self.checkBoxThumbnail.checkState() is not 0:
+                    im = Image.open(picture)
+                    im.thumbnail(self.THUMBNAIL, Image.ANTIALIAS)
+                    output_file = (picture.strip(".jpg").strip(".JPG") +
+                                   "_thumb.jpg")
+                    im.save(output_file, exif=exif_bytes)
 
     @staticmethod
     def exit():

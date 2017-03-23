@@ -162,6 +162,19 @@
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
+    <widget class="QCheckBox" name="checkBoxThumbnail">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>50</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Create Thumbnail</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="frame_3">
     <property name="geometry">
