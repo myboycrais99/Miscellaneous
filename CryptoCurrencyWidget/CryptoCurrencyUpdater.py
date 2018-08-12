@@ -99,7 +99,7 @@ Global Data
 Update pyinstaller with pip install pyinstaller
 If running in virtual environment, within PyCharm open python terminal
 View -> Tools Window -> Terminal
-pyinstaller --onefile --windowed --icon=logo.ico CryptoCurrencyUpdater.py
+pyinstaller --onefile --windowed --icon=resources/logo.ico CryptoCurrencyUpdater.py
 """
 
 __version__ = "1.0"
@@ -113,6 +113,8 @@ class GetCoinNames(QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.root_url = "https://api.coinmarketcap.com/v1/ticker/"
+        self._looping = False
+        self._update_frequency = 60 * 60
 
     @pyqtSlot(name="start")
     def start(self):
@@ -120,6 +122,9 @@ class GetCoinNames(QObject):
 
     @QtCore.pyqtSlot(int, name="getCoinNames")
     def get_coin_names(self, num_coins):
+        # self._looping = True
+        # while self._looping:
+        # TODO: Update how this thread is started/called so that the names get updated every hour
         with urllib.request.urlopen(self.root_url + "?limit={}"
                                     "".format(num_coins)) as url:
             data = json.loads(url.read().decode())
@@ -129,6 +134,7 @@ class GetCoinNames(QObject):
                 tmp_names.append(i["id"])
 
             self.coin_names_signal.emit(tmp_names)
+                # time.sleep(self._update_frequency)
 
 
 class GetCoinData(QObject):

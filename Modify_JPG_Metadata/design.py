@@ -107,5 +107,5 @@ class Ui_MainWindow(object):
         self.checkBoxThumbnail.setText(_translate("MainWindow", "Create Thumbnail"))
         self.TextTags.setPlaceholderText(_translate("MainWindow", "Tags must be semicolon deliminated"))
         self.LabelCopyright_2.setText(_translate("MainWindow", "Tags"))
-        self.CheckBoxRemove.setText(_translate("MainWindow", "Remove Exisint Tags"))
+        self.CheckBoxRemove.setText(_translate("MainWindow", "Remove Existing Tags"))
 

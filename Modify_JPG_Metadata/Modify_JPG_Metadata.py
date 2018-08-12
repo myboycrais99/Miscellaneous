@@ -32,7 +32,7 @@ class ModifyApp(QtGui_module.QMainWindow, design.Ui_MainWindow):
         self.COPYRIGHT = 33432
         self.CLASSIFICATION = 37394
         self.TAGS = 40094
-        self.THUMBNAIL = (100, 100)
+        self.THUMBNAIL = (300, 200)
 
         self.images = None
 
